@@ -1,110 +1,119 @@
 <template>
   <v-ons-page>
-    <v-ons-toolbar class="home-toolbar">
+    <ons-toolbar id="general-toolbar">
       <div class="left">
-        <v-ons-toolbar-button @click="$store.commit('splitter/toggle')">
-          <v-ons-icon icon="ion-navicon, material:md-menu"></v-ons-icon>
-        </v-ons-toolbar-button>
+        <ons-button modifier="quiet" @click="$store.commit('splitter/toggle')">
+          <img class="profile-thumbnail" src="http://placekitten.com/g/70/70">
+        </ons-button>
       </div>
-      <div class="center">{{ msg }}</div>
-    </v-ons-toolbar>
+      <div id="toolbar-center" class="center">{{title}}</div>
+      <div id="toolbar-right" class="right">
+        <ons-toolbar-button>
+          <ons-icon id="toolbar-icon" icon="ion-compose, material:"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+    </ons-toolbar>
 
-    <div class="header">
-      <img src="../assets/logo.png">
-    </div>
-
-    <v-ons-list-title>Vue.js Essential Links</v-ons-list-title>
-    <v-ons-list>
-      <v-ons-list-item v-for="item in essentialLinks" @click="goTo(item.link)" :key="item.link">
-        <div class="left"><v-ons-icon fixed-width :icon="item.icon"></v-ons-icon></div>
-        <div class="center">{{ item.label }}</div>
-        <div class="right"><v-ons-icon icon="fa-external-link"></v-ons-icon></div>
-      </v-ons-list-item>
-    </v-ons-list>
-
-    <v-ons-list-title>Vue.js Ecosystem</v-ons-list-title>
-    <v-ons-row>
-      <v-ons-col>
-        <v-ons-card @click="goTo('http://router.vuejs.org/')">vue-router</v-ons-card>
-      </v-ons-col>
-      <v-ons-col>
-        <v-ons-card @click="goTo('http://vuex.vuejs.org/')">vuex</v-ons-card>
-      </v-ons-col>
-    </v-ons-row>
-    <v-ons-row>
-      <v-ons-col>
-        <v-ons-card @click="goTo('http://vue-loader.vuejs.org/')">vue-loader</v-ons-card>
-      </v-ons-col>
-      <v-ons-col>
-        <v-ons-card @click="goTo('https://github.com/vuejs/awesome-vue')">awesome-vue</v-ons-card>
-      </v-ons-col>
-    </v-ons-row>
-
+    <v-ons-tabbar position="auto"
+                  :tabs="tabs"
+                  :visible="true"
+                  :index.sync="activeIndex">
+    </v-ons-tabbar>
   </v-ons-page>
 </template>
 
 <script>
-export default {
-  name: 'home',
-  data () {
-    return {
-      msg: 'Welcome',
-      essentialLinks: [
-        {
-          label: 'Core Docs',
-          link: 'https://vuejs.org',
-          icon: 'fa-book'
-        },
-        {
-          label: 'Community Chat',
-          link: 'https://chat.vuejs.org',
-          icon: 'fa-commenting'
-        },
-        {
-          label: 'Forum',
-          link: 'https://forum.vuejs.org',
-          icon: 'ion-chatboxes'
-        },
-        {
-          label: 'Twitter',
-          link: 'https://twitter.com/vuejs',
-          icon: 'fa-twitter'
-        },
-        {
-          label: 'Docs for this template',
-          link: 'http://vuejs-templates.github.io/webpack/',
-          icon: 'fa-file-text'
-        }
-      ]
-    }
-  },
-  methods: {
-    goTo (url) {
-      window.open(url, '_blank')
+
+  import Home from './Home/Home.vue';
+
+  export default {
+    name: 'home',
+    data() {
+      return {
+        msg: 'Welcome',
+        activeIndex: 0,
+        tabs: [
+          {
+            icon: 'ion-home',
+            label: '主页',
+            page: Home,
+            props: {
+              myProp: 'This is a page prop!'
+            },
+            key: "homePage"
+          },
+          {
+            icon: 'ion-chatboxes',
+            label: '论坛',
+            page: Home,
+            key: "newsPage"
+          },
+          {
+            icon: 'ion-ios-email',
+            label: '聊天',
+            page: Home,
+            badge: 7,
+            key: "settingsPage"
+          },
+          {
+            icon: 'ion-ios-settings',
+            label: '设置',
+            page: Home,
+            key: "settingsPage"
+          }
+        ]
+      }
+    },
+    methods: {
+      md() {
+        return this.$ons.platform.isAndroid();
+      }
+    },
+    computed: {
+      title() {
+        return this.tabs[this.activeIndex].label;
+      }
     }
   }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header {
-  text-align: center;
-}
+  .header {
+    text-align: center;
+  }
 
-img {
-  max-width: 300px;
-}
+  img {
+    max-width: 300px;
+  }
 
-ons-list-title:not(:first-of-type) {
-  margin-top: 30px;
-}
+  #general-toolbar .left,
+  #general-toolbar .right {
+    max-width: 15%;
+    text-align: center;
+  }
 
-ons-card {
-  text-align: center;
-}
+  #general-toolbar .center {
+    width: 90%;
+  }
 
-ons-list-item, ons-card {
-  cursor: pointer;
-}
+  #general-toolbar ons-toolbar-button:not(.toolbar-button--material),
+  .profile-thumbnail {
+    border-radius: 50%;
+    height: 28px;
+    margin-top: 5px;
+    width: 28px;
+  }
+
+  ons-list-title:not(:first-of-type) {
+    margin-top: 30px;
+  }
+
+  ons-card {
+    text-align: center;
+  }
+
+  ons-list-item, ons-card {
+    cursor: pointer;
+  }
 </style>
