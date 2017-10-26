@@ -20,4 +20,8 @@ new Vue({
   el: '#app',
   render: h => h(Navigator),
   store,
+  beforeCreate() {
+    // Shortcut for Material Design
+    Vue.prototype.md = this.$ons.platform.isAndroid();
+  }
 });

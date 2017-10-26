@@ -7,7 +7,7 @@
         </v-ons-back-button>
       </slot>
     </div>
-    <div class="center"><slot>{{ title }}</slot></div>
+    <div class="center"><slot name="center">{{ title }}</slot></div>
     <div class="right"><slot name="right"></slot></div>
   </v-ons-toolbar>
 </template>

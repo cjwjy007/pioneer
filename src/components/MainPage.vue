@@ -1,5 +1,5 @@
 <template>
-  <v-ons-page>
+  <v-ons-page :style="swipePosition">
     <ons-toolbar id="general-toolbar">
       <div class="left">
         <ons-button modifier="quiet" @click="$store.commit('splitter/toggle')">
@@ -15,6 +15,8 @@
     </ons-toolbar>
 
     <v-ons-tabbar position="auto"
+                  modifier="autogrow white-content"
+                  :on-swipe="md ? onSwipe : null"
                   :tabs="tabs"
                   :visible="true"
                   :index.sync="activeIndex">
@@ -29,10 +31,21 @@
   import Chat from './Chat/Chat.vue';
   import Setting from './Setting/Setting.vue';
 
+  // Just a linear interpolation formula
+  const lerp = (x0, x1, t) => parseInt((1 - t) * x0 + t * x1, 10);
+  // RGB colors
+  const red = [244, 67, 54];
+  const blue = [30, 136, 229];
+  const purple = [103, 58, 183];
+
   export default {
     name: 'main',
     data() {
       return {
+        shutUp: !this.md,
+        colors: red,
+        animationOptions: {},
+        topPosition: 0,
         activeIndex: 1,
         tabs: [
           {
@@ -59,7 +72,7 @@
           },
           {
             icon: 'ion-ios-settings',
-            label: '设置',
+            label: '我的',
             page: Setting,
             key: "settingPage"
           }
@@ -67,13 +80,24 @@
       }
     },
     methods: {
-      md() {
-        return this.$ons.platform.isAndroid();
-      }
+      onSwipe(index, animationOptions) {
+        // Apply the same transition as ons-tabbar
+        this.animationOptions = animationOptions;
+        // Interpolate colors and top position
+        const a = Math.floor(index), b = Math.ceil(index), ratio = index % 1;
+        this.colors = this.colors.map((c, i) => lerp(this.tabs[a].theme[i], this.tabs[b].theme[i], ratio));
+        this.topPosition = lerp(this.tabs[a].top || 0, this.tabs[b].top || 0, ratio);
+      },
     },
     computed: {
       title() {
         return this.tabs[this.activeIndex].label;
+      },
+      swipePosition() {
+        return this.md && {
+          top: this.topPosition + 'px',
+          transition: `all ${this.animationOptions.duration || 0}s ${this.animationOptions.timing || ''}`
+        }
       }
     }
   }

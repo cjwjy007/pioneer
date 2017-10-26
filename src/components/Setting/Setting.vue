@@ -25,25 +25,25 @@
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/photo.png" :width="picSize">
-            <p style="color: grey;font-size: large">Photo</p>
+            <p style="color: grey;font-size: large">帖子</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/design.png" :width="picSize">
-            <p style="color: grey;font-size: large">Design</p>
+            <p style="color: grey;font-size: large">回复</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/music.png" :width="picSize">
-            <p style="color: grey;font-size: large">Music</p>
+            <p style="color: grey;font-size: large">收藏</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
-            <img src="../../assets/images/music.png" :width="picSize">
-            <p style="color: grey;font-size: large">Music</p>
+            <img src="../../assets/images/art.png" :width="picSize">
+            <p style="color: grey;font-size: large">历史</p>
           </div>
         </v-ons-col>
       </v-ons-row>
@@ -51,25 +51,13 @@
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/movie.png" :width="picSize">
-            <p style="color: grey;font-size: large">Movie</p>
+            <p style="color: grey;font-size: large">提醒</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/sport.png" :width="picSize">
-            <p style="color: grey;font-size: large">Sport</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/art.png" :width="picSize">
-            <p style="color: grey;font-size: large">Art</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/art.png" :width="picSize">
-            <p style="color: grey;font-size: large">Art</p>
+            <p style="color: grey;font-size: large">发现</p>
           </div>
         </v-ons-col>
       </v-ons-row>
@@ -82,51 +70,19 @@
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/photo.png" :width="picSize">
-            <p style="color: grey;font-size: large">Photo</p>
+            <p style="color: grey;font-size: large">清理缓存</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/design.png" :width="picSize">
-            <p style="color: grey;font-size: large">Design</p>
+            <p style="color: grey;font-size: large">版本</p>
           </div>
         </v-ons-col>
         <v-ons-col width="25%">
           <div align="center">
             <img src="../../assets/images/music.png" :width="picSize">
-            <p style="color: grey;font-size: large">Music</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/music.png" :width="picSize">
-            <p style="color: grey;font-size: large">Music</p>
-          </div>
-        </v-ons-col>
-      </v-ons-row>
-      <v-ons-row>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/movie.png" :width="picSize">
-            <p style="color: grey;font-size: large">Movie</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/sport.png" :width="picSize">
-            <p style="color: grey;font-size: large">Sport</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/art.png" :width="picSize">
-            <p style="color: grey;font-size: large">Art</p>
-          </div>
-        </v-ons-col>
-        <v-ons-col width="25%">
-          <div align="center">
-            <img src="../../assets/images/art.png" :width="picSize">
-            <p style="color: grey;font-size: large">Art</p>
+            <p style="color: grey;font-size: large">联系我们</p>
           </div>
         </v-ons-col>
       </v-ons-row>
