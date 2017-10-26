@@ -25,13 +25,15 @@
 <script>
 
   import Home from './Home/Home.vue';
+  import Forum from './Forum/Forum.vue';
+  import Chat from './Chat/Chat.vue';
+  import Setting from './Setting/Setting.vue';
 
   export default {
-    name: 'home',
+    name: 'main',
     data() {
       return {
-        msg: 'Welcome',
-        activeIndex: 0,
+        activeIndex: 1,
         tabs: [
           {
             icon: 'ion-home',
@@ -45,21 +47,21 @@
           {
             icon: 'ion-chatboxes',
             label: '论坛',
-            page: Home,
-            key: "newsPage"
+            page: Forum,
+            key: "forumPage"
           },
           {
             icon: 'ion-ios-email',
             label: '聊天',
-            page: Home,
+            page: Chat,
             badge: 7,
-            key: "settingsPage"
+            key: "chatPage"
           },
           {
             icon: 'ion-ios-settings',
             label: '设置',
-            page: Home,
-            key: "settingsPage"
+            page: Setting,
+            key: "settingPage"
           }
         ]
       }

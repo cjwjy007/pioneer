@@ -1,12 +1,12 @@
 <template>
   <v-ons-page>
     <div>
-      <div class="menu-header-bar">
-        <div class="menu-header-bar-container">
-          <img class="menu-profile-img" src="http://placekitten.com/g/70/70">
-          <ul class="menu-profile-des">
+      <div class="setting-header-bar">
+        <div class="setting-header-bar-container">
+          <img class="setting-profile-img" src="http://placekitten.com/g/70/70">
+          <ul class="setting-profile-des">
             <li>
-            <span class="menu-user-name">
+            <span class="setting-user-name">
               Admin
             </span>
             </li>
@@ -89,14 +89,14 @@
     list-style-type: none;
   }
 
-  .menu-profile-img {
+  .setting-profile-img {
     border-radius: 50%;
     height: 50px;
     width: 50px;
     float: left;
   }
 
-  .menu-header-bar {
+  .setting-header-bar {
     background-color: #ffffff;
     height: 90px;
     border: 1px solid #d1dbe5;
@@ -140,19 +140,19 @@
     padding: 5px 0px;
   }
 
-  .menu-header-bar-container {
+  .setting-header-bar-container {
     margin: 0px;
     padding: 5% 5%;
   }
 
-  .menu-profile-des {
+  .setting-profile-des {
     width: 50%;
     float: left;
     margin: 0px 8px;
     padding: 0px 5px;
   }
 
-  .menu-user-name {
+  .setting-user-name {
     font-size: 30px;
   }
 </style>

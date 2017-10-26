@@ -1,10 +1,19 @@
 <template>
   <v-ons-page>
+    <v-ons-pull-hook
+      :action="loadItem"
+      @changestate="hookState = $event.state"
+    >
+      <span v-show="hookState === 'initial'"> 下拉刷新 </span>
+      <span v-show="hookState === 'preaction'"> 释放 </span>
+      <span v-show="hookState === 'action'"> 读取中... </span>
+    </v-ons-pull-hook>
+
     <div class="home-carousel">
       <v-ons-carousel swipeable auto-scroll overscrollable
                       :index.sync="carouselIndex" style="height: 165px">
-        <v-ons-carousel-item v-for="img in carouselImg">
-          <img :src="img" alt="image" style="width: 100%;height: 240px">
+        <v-ons-carousel-item v-for="img in carouselImg" :key="img.id">
+          <img :src="img.src" alt="image" style="width: 100%;height: 240px">
         </v-ons-carousel-item>
       </v-ons-carousel>
 
@@ -73,6 +82,7 @@
   export default {
     data: function () {
       return {
+        hookState: 'initial',
         posts: [
           {
             icon: 'http://placekitten.com/g/40/40',
@@ -101,17 +111,31 @@
         carouselIndex: 0,
         dotIndex: 0,
         carouselImg: [
-          'http://placekitten.com/g/327/200',
-          'http://placekitten.com/g/327/240',
-          'http://placekitten.com/g/300/240',
+          {
+            id: 1,
+            src: 'http://placekitten.com/g/327/200'
+          }, {
+            id: 2,
+            src: 'http://placekitten.com/g/327/240'
+          }, {
+            id: 3,
+            src: 'http://placekitten.com/g/300/240'
+          }
         ]
       }
     },
-    methods: {}
+    methods: {
+      loadItem(done) {
+        setTimeout(() => {
+          done();
+        }, 400);
+      }
+    }
   }
 </script>
 
-<style>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
   .dots {
     text-align: center;
     font-size: 30px;
@@ -165,7 +189,7 @@
     margin-left: 7px;
   }
 
-  .home-posts-content img{
+  .home-posts-content img {
     display: block;
     margin-top: 10px;
   }
