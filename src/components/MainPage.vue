@@ -46,7 +46,7 @@
         colors: red,
         animationOptions: {},
         topPosition: 0,
-        activeIndex: 1,
+        activeIndex: 3,
         tabs: [
           {
             icon: 'ion-home',

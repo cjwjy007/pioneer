@@ -7,41 +7,51 @@
           <ul class="setting-profile-des">
             <li>
             <span class="setting-user-name">
-              Admin
+              {{userName}}
             </span>
             </li>
             <li>
             <span class="menu-user-id">
-              ID:12345
+              ID:{{userID}}
             </span>
             </li>
           </ul>
         </div>
       </div>
-      <div class="menu-info-bar">
-        <v-ons-row>
-          <v-ons-col class="menu-info-bar-item">
-            <a><span>Posts</span> <b>3</b></a>
-          </v-ons-col>
-          <v-ons-col class="menu-info-bar-item">
-            <a><span>Follows</span> <b>3</b></a>
-          </v-ons-col>
-          <v-ons-col class="menu-info-bar-item">
-            <a><span>Fans</span> <b>3</b></a>
-          </v-ons-col>
-        </v-ons-row>
+      <div v-if="isLogin">
+        <div class="menu-info-bar">
+          <v-ons-row>
+            <v-ons-col class="menu-info-bar-item">
+              <a><span>发帖</span> <b>3</b></a>
+            </v-ons-col>
+            <v-ons-col class="menu-info-bar-item">
+              <a><span>关注</span> <b>4</b></a>
+            </v-ons-col>
+            <v-ons-col class="menu-info-bar-item">
+              <a><span>粉丝</span> <b>5</b></a>
+            </v-ons-col>
+          </v-ons-row>
+        </div>
+        <div class="menu-list-bar">
+          <v-ons-list>
+            <v-ons-list-item tappable modifier="longdivider">修改信息</v-ons-list-item>
+            <v-ons-list-item tappable modifier="longdivider" @click="logout">退出登录</v-ons-list-item>
+          </v-ons-list>
+        </div>
       </div>
-      <div class="menu-list-bar">
-        <v-ons-list>
-          <v-ons-list-item tappable modifier="longdivider">修改信息</v-ons-list-item>
-          <v-ons-list-item tappable modifier="longdivider">退出登录</v-ons-list-item>
-        </v-ons-list>
+      <div v-else>
+        <div class="menu-list-bar">
+          <v-ons-list>
+            <v-ons-list-item tappable modifier="longdivider" @click="login">登录</v-ons-list-item>
+          </v-ons-list>
+        </div>
       </div>
     </div>
   </v-ons-page>
 </template>
 
 <script>
+  import Login from './Auth/login.vue';
   export default {
     name: 'menu',
     data() {
@@ -78,6 +88,27 @@
     methods: {
       goTo(url) {
         window.open(url, '_blank')
+      },
+      login(){
+        if(!this.isLogin){
+          this.$store.commit('navigator/push', Login);
+        }
+      },
+      logout(){
+        if(this.isLogin){
+          this.$store.dispatch('auth/commitLogout');
+        }
+      }
+    },
+    computed: {
+      userName: function () {
+        return this.$store.state.auth.token !== null ? this.$store.state.auth.name : '请登录';
+      },
+      userID: function () {
+        return this.$store.state.auth.token !== null ? this.$store.state.auth.id : '';
+      },
+      isLogin: function () {
+        return this.$store.state.auth.token !== null;
       }
     }
   }
@@ -102,7 +133,7 @@
     border: 1px solid #d1dbe5;
   }
 
-  .menu-info-bar{
+  .menu-info-bar {
     border: 1px solid #d1dbe5;
     background-color: #fff;
     overflow: hidden;
@@ -110,7 +141,7 @@
     margin-bottom: 1px;
   }
 
-  .menu-list-bar{
+  .menu-list-bar {
     border: 1px solid #d1dbe5;
     background-color: #fff;
     overflow: hidden;
@@ -118,23 +149,23 @@
     margin-bottom: 1px;
   }
 
-  .menu-info-bar-item{
+  .menu-info-bar-item {
     border-right: 1px solid #d1dbe5;
   }
 
-  .menu-info-bar-item span{
+  .menu-info-bar-item span {
     width: 100%;
-    float:left;
-    text-align:center;
+    float: left;
+    text-align: center;
     border-top: 1px solid #d1dbe5;
     font-size: 15px;
     padding: 5px 0px;
   }
 
-  .menu-info-bar-item b{
+  .menu-info-bar-item b {
     width: 100%;
-    float:left;
-    text-align:center;
+    float: left;
+    text-align: center;
     border-top: 1px solid #d1dbe5;
     font-size: 20px;
     padding: 5px 0px;
@@ -146,13 +177,13 @@
   }
 
   .setting-profile-des {
-    width: 50%;
+    width: 60%;
     float: left;
     margin: 0px 8px;
     padding: 0px 5px;
   }
 
   .setting-user-name {
-    font-size: 30px;
+    font-size: 20px;
   }
 </style>
