@@ -41,6 +41,8 @@
     },
     methods: {
       checkLogin() {
+        const event = event || window.event;
+        event.preventDefault();
         if(this.userInfo.username && this.userInfo.password){
           this.$store.dispatch('auth/commitLogin', this.userInfo);
         }else{
@@ -53,7 +55,7 @@
 
 <style>
   .background-image {
-    background: url('../../assets/images/background.jpg') no-repeat;
+    background-image: url('../../assets/images/background.jpg');
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
@@ -191,4 +193,5 @@
     color: white;
     fill: white;
   }
+
 </style>
