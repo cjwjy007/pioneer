@@ -15,7 +15,6 @@
     </ons-toolbar>
 
     <v-ons-tabbar position="auto"
-                  modifier="autogrow white-content"
                   :on-swipe="md ? onSwipe : null"
                   :tabs="tabs"
                   :visible="true"
@@ -46,7 +45,7 @@
         colors: red,
         animationOptions: {},
         topPosition: 0,
-        activeIndex: 3,
+        activeIndex: 1,
         tabs: [
           {
             icon: 'ion-home',

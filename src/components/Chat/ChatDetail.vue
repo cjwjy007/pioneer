@@ -1,30 +1,36 @@
 <template>
-  <v-ons-page>
+  <v-ons-page id="chat-page">
     <custom-toolbar backLabel="Chat">
       <div slot="center">{{ user.name }}</div>
       <div slot="right"><img class="chat-detail-icon" :src="user.icon"></div>
     </custom-toolbar>
-    <div v-for="message in messages" class="message-wrapper">
-      <div v-if="message.sendOut">
-        <span class="dateDetail" style="float:right">{{message.date }}</span>
-        <img class="profile-pic left" :src="user.icon">
-        <div class="chat-bubble-left">
-          <span class="bubble-tri-left"></span>
-          <div class="message">{{message.content}}</div>
+    <ul>
+      <li v-for="(message, index) in messages" :key="message.content">
+        <div class="message-wrapper">
+          <div v-if="!message.sendOut">
+            <span class="dateDetail" style="float:right">{{message.date }}</span>
+            <img class="profile-pic left" :src="user.icon">
+            <div class="chat-bubble-left">
+              <span class="bubble-tri-left"></span>
+              <div class="message">{{message.content}}</div>
+            </div>
+          </div>
+          <div v-else>
+            <span class="dateDetail" style="float:left">{{message.date }}</span>
+            <img class="profile-pic right" :src="user.icon">
+            <div class="chat-bubble-right">
+              <span class="bubble-tri-right"></span>
+              <div class="message">{{message.content}}</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div v-else>
-        <span class="dateDetail" style="float:left">{{message.date }}</span>
-        <img class="profile-pic right" :src="user.icon">
-        <div class="chat-bubble-right">
-          <span class="bubble-tri-right"></span>
-          <div class="message">{{message.content}}</div>
-        </div>
-      </div>
-    </div>
+      </li>
+
+    </ul>
+
     <div class="foot-wrapper">
       <input class="chat-input" type="text" name="" @keyup.enter="send(msg)" v-model="msg">
-      <button :class="{'ion-ios-paw':!!msg,'ion-ios-paw-outline':!msg}" class="chat-sub"></button>
+      <button class="chat-sub" @click="sendMsg"><i class="icon ion-paper-airplane"></i></button>
     </div>
   </v-ons-page>
 </template>
@@ -58,7 +64,18 @@
         ]
       }
     },
-    methods: {}
+    methods: {
+      sendMsg() {
+        this.messages.push(
+          {
+            date: 'just now',
+            content: this.msg,
+            sendOut: true,
+          }
+        )
+        this.msg = '';
+      }
+    }
   }
 </script>
 
@@ -89,7 +106,6 @@
   }
 
   .chat-sub {
-    align-items: center;
     height: 100%;
     font-size: 30px;
   }
@@ -101,7 +117,6 @@
     margin: 4px 10px 4px 4px;
     float: right;
   }
-
 
   img.profile-pic {
     width: 40px;
@@ -203,6 +218,15 @@
     display: inline-block;
     width: 69px;
     text-align: center;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0
+  }
+
+  li {
+    list-style-type: none;
   }
 
 </style>
