@@ -1,6 +1,6 @@
 # pioneer
 
-> A social communication app
+> A social communication app, further details are yet to come
 
 ## Build Setup
 
