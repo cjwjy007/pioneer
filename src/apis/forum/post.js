@@ -8,3 +8,11 @@ export function getPosts(forumInfo) {
     forumInfo
   });
 }
+
+export function sendNewPost(newPost){
+  return fetch({
+    url: '/forum/newPost',
+    method: 'post',
+    newPost
+  });
+}

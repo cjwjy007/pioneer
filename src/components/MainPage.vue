@@ -8,9 +8,6 @@
       </div>
       <div id="toolbar-center" class="center">{{title}}</div>
       <div id="toolbar-right" class="right">
-        <ons-toolbar-button>
-          <ons-icon id="toolbar-icon" icon="ion-compose, material:"></ons-icon>
-        </ons-toolbar-button>
       </div>
     </ons-toolbar>
 

@@ -1,6 +1,11 @@
 <template>
   <v-ons-page>
     <custom-toolbar :backLabel="forumName" title="主题">
+      <div slot="right">
+        <ons-toolbar-button>
+          <ons-icon id="toolbar-icon" icon="ion-ios-list-outline, material:"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </custom-toolbar>
     <v-ons-card style="text-align: center;font-size: 18px">
       <b>{{postId}}</b>
@@ -92,11 +97,11 @@
     margin-left: 50px;
   }
 
-  .home-icon-group{
+  .home-icon-group {
     margin-left: 7px;
   }
 
-  .post-content{
+  .post-content {
     border-top: 1px #e7e7e7 solid;
     border-bottom: 1px #e7e7e7 solid;
     padding: 15px 0px;

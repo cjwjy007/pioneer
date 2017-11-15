@@ -15,12 +15,12 @@
         </div>
          <div id="loginform">
           <form>
-            <input type="text" placeholder="username or email" v-model="userInfo.username">
-            <input type="password" placeholder="password" v-model="userInfo.password">
+            <input type="text" placeholder="用户名或邮箱" v-model="userInfo.username">
+            <input type="password" placeholder="密码" v-model="userInfo.password">
             <button @click="checkLogin"><i class="fa fa-arrow-right"></i></button>
           </form>
           <div id="note">
-            <a href="#">Register an account</a>
+            <a href="#">没有账号？</a>
           </div>
         </div>
       </div>
@@ -102,7 +102,7 @@
   }
 
   .background-image button {
-    background: #ff5f32;
+    background: hsl(161, 53%, 61%);
     border-radius: 50%;
     border: 10px solid #222526;
     font-size: 0.9em;
@@ -124,7 +124,7 @@
 
   .background-image button:hover {
     background: #222526;
-    border-color: #ff5f32;
+    border-color:hsl(161, 53%, 61%);
     -webkit-transition: 0.5s ease;
     -moz-transition: 0.5s ease;
     -o-transition: 0.5s ease;
@@ -142,7 +142,7 @@
   }
 
   .background-image button:hover i {
-    color: #ff5f32;
+    color: hsl(161, 53%, 61%);
     -webkit-transition: 0.5s ease;
     -moz-transition: 0.5s ease;
     -o-transition: 0.5s ease;

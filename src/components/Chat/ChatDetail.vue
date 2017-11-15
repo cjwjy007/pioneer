@@ -30,7 +30,7 @@
 
     <div class="foot-wrapper">
       <input class="chat-input" type="text" name="" @keyup.enter="send(msg)" v-model="msg">
-      <button class="chat-sub" @click="sendMsg"><i class="icon ion-paper-airplane"></i></button>
+      <a class="chat-sub" @click="sendMsg"><i class="icon ion-paper-airplane"></i></a>
     </div>
   </v-ons-page>
 </template>
@@ -66,14 +66,16 @@
     },
     methods: {
       sendMsg() {
-        this.messages.push(
-          {
-            date: 'just now',
-            content: this.msg,
-            sendOut: true,
-          }
-        )
-        this.msg = '';
+        if(this.msg !== ''){
+          this.messages.push(
+            {
+              date: 'just now',
+              content: this.msg,
+              sendOut: true,
+            }
+          );
+          this.msg = '';
+        }
       }
     }
   }
@@ -108,6 +110,7 @@
   .chat-sub {
     height: 100%;
     font-size: 30px;
+    margin-right: 7px;
   }
 
   .chat-detail-icon {

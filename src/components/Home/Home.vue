@@ -36,12 +36,10 @@
           <ons-button class="home-posts-header-arrow" modifier="quiet" @click="$ons.openActionSheet({
               cancelable: true,
               buttons: [
-                'Share Tweet via...',
-                'Add to Moment',
-                'I don\'t like this Tweet',
-                'Report Tweet',
+                '添加到收藏',
+                '不喜欢该推荐',
                 {
-                  label: 'Cancel',
+                  label: '取消',
                   icon: 'md-close'
                 }
               ]
@@ -138,10 +136,10 @@
 <style scoped>
   .dots {
     text-align: center;
-    font-size: 30px;
+    font-size: 27px;
     color: #fff;
     position: relative;
-    bottom: 50px;
+    bottom: 40px;
     left: 0;
     right: 0;
   }

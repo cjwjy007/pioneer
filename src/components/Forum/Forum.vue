@@ -7,60 +7,60 @@
     <v-ons-row>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/photo.png" :width="picSize" @click="pushPage('Photo')">
-          <p style="color: grey;font-size: large">Photo</p>
+          <img src="../../assets/images/photo.png" :width="picSize" @click="pushPage('摄影')">
+          <p style="color: grey;font-size: large">摄影</p>
         </div>
       </v-ons-col>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/design.png" :width="picSize" @click="pushPage('Design')">
-          <p style="color: grey;font-size: large">Design</p>
+          <img src="../../assets/images/design.png" :width="picSize" @click="pushPage('设计')">
+          <p style="color: grey;font-size: large">设计</p>
         </div>
       </v-ons-col>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/music.png" :width="picSize" @click="pushPage('Music')">
-          <p style="color: grey;font-size: large">Music</p>
-        </div>
-      </v-ons-col>
-    </v-ons-row>
-    <v-ons-row>
-      <v-ons-col width="33%">
-        <div align="center">
-          <img src="../../assets/images/movie.png" :width="picSize" @click="pushPage('Movie')">
-          <p style="color: grey;font-size: large">Movie</p>
-        </div>
-      </v-ons-col>
-      <v-ons-col width="33%">
-        <div align="center">
-          <img src="../../assets/images/sport.png" :width="picSize" @click="pushPage('Sport')">
-          <p style="color: grey;font-size: large">Sport</p>
-        </div>
-      </v-ons-col>
-      <v-ons-col width="33%">
-        <div align="center">
-          <img src="../../assets/images/art.png" :width="picSize" @click="pushPage('Art')">
-          <p style="color: grey;font-size: large">Art</p>
+          <img src="../../assets/images/music.png" :width="picSize" @click="pushPage('音乐')">
+          <p style="color: grey;font-size: large">音乐</p>
         </div>
       </v-ons-col>
     </v-ons-row>
     <v-ons-row>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/handcraft.png" :width="picSize" @click="pushPage('HandCraft')">
-          <p style="color: grey;font-size: large">HandCraft</p>
+          <img src="../../assets/images/movie.png" :width="picSize" @click="pushPage('电影')">
+          <p style="color: grey;font-size: large">电影</p>
         </div>
       </v-ons-col>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/painting.png" :width="picSize" @click="pushPage('Painting')">
-          <p style="color: grey;font-size: large">Painting</p>
+          <img src="../../assets/images/sport.png" :width="picSize" @click="pushPage('体育')">
+          <p style="color: grey;font-size: large">体育</p>
         </div>
       </v-ons-col>
       <v-ons-col width="33%">
         <div align="center">
-          <img src="../../assets/images/coding.png" :width="picSize" @click="pushPage('Coding')">
-          <p style="color: grey;font-size: large">Coding</p>
+          <img src="../../assets/images/art.png" :width="picSize" @click="pushPage('艺术')">
+          <p style="color: grey;font-size: large">艺术</p>
+        </div>
+      </v-ons-col>
+    </v-ons-row>
+    <v-ons-row>
+      <v-ons-col width="33%">
+        <div align="center">
+          <img src="../../assets/images/handcraft.png" :width="picSize" @click="pushPage('手工')">
+          <p style="color: grey;font-size: large">手工</p>
+        </div>
+      </v-ons-col>
+      <v-ons-col width="33%">
+        <div align="center">
+          <img src="../../assets/images/painting.png" :width="picSize" @click="pushPage('绘画')">
+          <p style="color: grey;font-size: large">绘画</p>
+        </div>
+      </v-ons-col>
+      <v-ons-col width="33%">
+        <div align="center">
+          <img src="../../assets/images/coding.png" :width="picSize" @click="pushPage('代码')">
+          <p style="color: grey;font-size: large">代码</p>
         </div>
       </v-ons-col>
     </v-ons-row>

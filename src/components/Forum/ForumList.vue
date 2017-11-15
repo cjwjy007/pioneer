@@ -1,6 +1,11 @@
 <template>
   <v-ons-page>
-    <custom-toolbar backLabel="Forum" :title="title">
+    <custom-toolbar backLabel="论坛" :title="title">
+      <div slot="right">
+        <ons-toolbar-button @click="newPost">
+          <ons-icon id="toolbar-icon" icon="ion-compose, material:"></ons-icon>
+        </ons-toolbar-button>
+      </div>
     </custom-toolbar>
     <v-ons-list>
       <v-ons-lazy-repeat v-if="getListFinished"
@@ -15,6 +20,7 @@
 <script>
   import Vue from 'vue'
   import PostDetail from './PostDetail.vue'
+  import NewPost from './NewPost.vue'
   import {getPosts} from '../../apis/forum/post'
 
   export default {
@@ -51,8 +57,8 @@
                   listItem: item
                 };
               },
-              methods:{
-                pushPostDetail(postId){
+              methods: {
+                pushPostDetail(postId) {
                   _this.$store.commit('navigator/push', {
                     extends: PostDetail,
                     data() {
@@ -76,6 +82,17 @@
           this.getListFinished = true;
         }, response => {
         })
+      },
+      newPost(){
+        const title = this.title;
+        this.$store.commit('navigator/push', {
+          extends: NewPost,
+          data() {
+            return {
+              forumName: title,
+            }
+          }
+        });
       }
     }
   }
