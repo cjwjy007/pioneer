@@ -17,10 +17,10 @@
           <form>
             <input type="text" placeholder="用户名或邮箱" v-model="userInfo.username">
             <input type="password" placeholder="密码" v-model="userInfo.password">
-            <button @click="checkLogin"><i class="fa fa-arrow-right"></i></button>
+            <button class="login-button" @click="checkLogin"><i class="fa fa-arrow-right"></i></button>
           </form>
           <div id="note">
-            <a href="#">没有账号？</a>
+            <a @click="register">没有账号？</a>
           </div>
         </div>
       </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import Register from './Register.vue'
   export default {
     data: function () {
       return {
@@ -48,6 +49,14 @@
         }else{
           this.$ons.notification.toast('请输入用户名与密码', { animation: "fall", buttonLabel: 'x', timeout: 1500 })
         }
+      },
+      register(){
+        this.$store.commit('navigator/push', {
+          extends: Register,
+          data() {
+            return {}
+          }
+        });
       }
     }
   }
@@ -101,7 +110,7 @@
     box-shadow: 0px 0px 5px 1px #161718;
   }
 
-  .background-image button {
+  .background-image .login-button {
     background: hsl(161, 53%, 61%);
     border-radius: 50%;
     border: 10px solid #222526;

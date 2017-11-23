@@ -91,7 +91,7 @@
 </template>
 
 <script>
-  import Login from '../Auth/login.vue';
+  import Login from '../Auth/Login.vue';
   import post from './MyPost.vue';
   import reply from './MyReply.vue';
   import favorite from './MyFavorite.vue';

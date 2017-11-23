@@ -2,7 +2,18 @@
   <v-ons-page>
     <custom-toolbar :backLabel="forumName" title="主题">
       <div slot="right">
-        <ons-toolbar-button>
+        <ons-toolbar-button  @click="$ons.openActionSheet({
+              cancelable: true,
+              buttons: [
+                '回复',
+                '添加到收藏',
+                '举报',
+                {
+                  label: '取消',
+                  icon: 'md-close'
+                }
+              ]
+            })">
           <ons-icon id="toolbar-icon" icon="ion-ios-list-outline, material:"></ons-icon>
         </ons-toolbar-button>
       </div>

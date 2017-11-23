@@ -51,7 +51,7 @@
 </template>
 
 <script>
-  import Login from './Auth/login.vue';
+  import Login from './Auth/Login.vue';
   export default {
     name: 'menu',
     data() {

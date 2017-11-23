@@ -1,5 +1,13 @@
 <template>
   <v-ons-page>
+    <v-ons-pull-hook
+      :action="loadItem"
+      @changestate="hookState = $event.state"
+    >
+      <span v-show="hookState === 'initial'"> 下拉刷新 </span>
+      <span v-show="hookState === 'preaction'"> 释放 </span>
+      <span v-show="hookState === 'action'"> 读取中... </span>
+    </v-ons-pull-hook>
     <custom-toolbar backLabel="论坛" :title="title">
       <div slot="right">
         <ons-toolbar-button @click="newPost">
@@ -29,6 +37,7 @@
     },
     data: function () {
       return {
+        hookState: 'initial',
         getListFinished: false,
         renderItem:
           i => {
@@ -93,6 +102,14 @@
             }
           }
         });
+      },
+      loadItem(done) {
+        getPosts(this.title).then(response => {
+          this.forumList = response.data;
+          this.getListFinished = true;
+          done();
+        }, response => {
+        })
       }
     }
   }

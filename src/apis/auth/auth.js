@@ -15,3 +15,11 @@ export function logout() {
     method: 'post',
   });
 }
+
+export function register(userInfo) {
+  return fetch({
+    url: '/user/register',
+    method: 'post',
+    userInfo
+  });
+}

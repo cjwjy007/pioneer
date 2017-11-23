@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
-import {login, logout} from './apis/login/auth.js';
+import {login, logout,register} from './apis/auth/auth.js';
 
 Vue.use(Vuex)
 
@@ -17,6 +17,16 @@ export default new Vuex.Store({
         role: -1
       },
       actions: {
+        commitRegister(store, userInfo){
+          register(userInfo).then(response => {
+            this.commit('navigator/pop');
+            this.dispatch('auth/commitLogin',{
+              username: userInfo.username,
+              password: userInfo.password
+            })
+          }, response => {
+          })
+        },
         commitLogin(store, userInfo) {
           login(userInfo).then(response => {
             const token = response.data.token;
@@ -35,7 +45,8 @@ export default new Vuex.Store({
         commitLogout(store) {
           logout().then(response => {
             Cookies.remove('token');
-            store.commit('LOGOUT')
+            store.commit('LOGOUT');
+            this.commit('navigator/cleanNextPage');
           }, response => {
           })
         }

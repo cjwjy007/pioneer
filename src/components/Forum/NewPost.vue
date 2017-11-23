@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar backLabel="返回" title="主题">
     </custom-toolbar>
-    <v-ons-card style="height: 85%">
+    <v-ons-card class="new-post-card">
       <ul class="list list--material">
         <li class="list__item list__item--material post-list-header">
           <div class="list__item__center list__item--material__center">
@@ -77,5 +77,13 @@
 
   .post-list-body {
     padding: 5px;
+  }
+
+  .new-post-card{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 50px;
+    top: 0;
   }
 </style>
