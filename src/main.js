@@ -8,7 +8,7 @@ import VueOnsen from 'vue-onsenui'
 import store from './store'
 import Navigator from './AppNavigator.vue'
 import CustomToolbar from './components/CustomToolbar.vue';
-
+import Cookies from 'js-cookie'
 
 Vue.config.productionTip = false
 
@@ -23,5 +23,6 @@ new Vue({
   beforeCreate() {
     // Shortcut for Material Design
     Vue.prototype.md = this.$ons.platform.isAndroid();
+    this.$store.dispatch('auth/cookieLogin');
   }
 });

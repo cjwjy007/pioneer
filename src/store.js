@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Cookies from 'js-cookie'
-import {login, logout,register} from './apis/auth/auth.js';
+import {login, logout, register} from './apis/auth/auth.js';
+import {getUserIcon} from './apis/util/util';
 
 Vue.use(Vuex)
 
@@ -17,10 +18,25 @@ export default new Vuex.Store({
         role: -1
       },
       actions: {
-        commitRegister(store, userInfo){
+        getUserIcon(store,type,userInfo){
+          return getUserIcon(type,userInfo);
+        },
+        cookieLogin(store) {
+          if (Cookies.get('token')) {
+            const token = Cookies.get('token');
+            const userInfo = Cookies.getJSON('userInfo');
+            store.commit('LOGIN', {
+              id: userInfo.id,
+              name: userInfo.name,
+              token: token,
+              role: userInfo.role
+            })
+          }
+        },
+        commitRegister(store, userInfo) {
           register(userInfo).then(response => {
             this.commit('navigator/pop');
-            this.dispatch('auth/commitLogin',{
+            this.dispatch('auth/commitLogin', {
               username: userInfo.username,
               password: userInfo.password
             })
@@ -30,12 +46,14 @@ export default new Vuex.Store({
         commitLogin(store, userInfo) {
           login(userInfo).then(response => {
             const token = response.data.token;
+            const userInfo = response.data;
             Cookies.set('token', token);
+            Cookies.set('userInfo', userInfo);
             store.commit('LOGIN', {
-              id: response.data.id,
-              name: response.data.name,
+              id: userInfo.id,
+              name: userInfo.name,
               token: token,
-              role: response.data.role
+              role: userInfo.role
             })
             this.commit('navigator/pop');
             this.commit('navigator/pushNextPage');
@@ -45,6 +63,7 @@ export default new Vuex.Store({
         commitLogout(store) {
           logout().then(response => {
             Cookies.remove('token');
+            Cookies.remove('userInfo');
             store.commit('LOGOUT');
             this.commit('navigator/cleanNextPage');
           }, response => {
@@ -90,7 +109,7 @@ export default new Vuex.Store({
           state.nextPage = null;
         },
         pushNextPage(state) {
-          if(state.nextPage){
+          if (state.nextPage) {
             state.stack.push(state.nextPage);
           }
         },

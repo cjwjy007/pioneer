@@ -5,7 +5,7 @@ export function login(userInfo) {
  return fetch({
    url: '/user/login',
    method: 'post',
-   userInfo
+   data: userInfo
  });
 }
 
@@ -20,6 +20,6 @@ export function register(userInfo) {
   return fetch({
     url: '/user/register',
     method: 'post',
-    userInfo
+    data: userInfo
   });
 }

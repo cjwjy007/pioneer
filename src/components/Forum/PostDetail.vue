@@ -2,7 +2,7 @@
   <v-ons-page>
     <custom-toolbar :backLabel="forumName" title="主题">
       <div slot="right">
-        <ons-toolbar-button  @click="$ons.openActionSheet({
+        <ons-toolbar-button @click="$ons.openActionSheet({
               cancelable: true,
               buttons: [
                 '回复',
@@ -18,24 +18,25 @@
         </ons-toolbar-button>
       </div>
     </custom-toolbar>
-    <v-ons-card style="text-align: center;font-size: 18px">
-      <b>{{postId}}</b>
-    </v-ons-card>
-    <div v-for="post in postContents" :key="post.floor">
-      <v-ons-card style="padding-bottom: 40px">
+    <div class="content">
+      <v-ons-card style="text-align: center;font-size: 18px">
+        <b>{{title}}</b>
+      </v-ons-card>
+      <v-ons-card style="padding-bottom: 40px" v-for="reply in replies" :key="reply.floor">
         <div class="home-posts-header">
-          <img class="home-posts-header-icon" :src="post.icon">
+          <img class="home-posts-header-icon" :src="reply.icon">
           <div class="home-posts-header-info">
             <div>
-              <b>{{post.name}}</b>
-              <span class="pull-right">{{post.floor}}楼</span>
+              <b>{{reply.user}}</b>
+              <span class="pull-right" v-if="reply.floor === 0">楼主</span>
+              <span class="pull-right" v-else>{{reply.floor}}楼</span>
             </div>
           </div>
         </div>
 
         <div class="post-content">
           <div>
-            {{post.content}}
+            {{reply.content}}
           </div>
         </div>
 
@@ -44,17 +45,17 @@
             <ons-row class="home-icon-group">
               <ons-col>
                 <ons-button modifier="quiet">
-                  <ons-icon icon="ion-thumbsup"></ons-icon>
-                </ons-button>
-              </ons-col>
-              <ons-col>
-                <ons-button modifier="quiet">
                   <ons-icon icon="ion-chatbox-working"></ons-icon>
                 </ons-button>
               </ons-col>
               <ons-col>
                 <ons-button modifier="quiet">
-                  <ons-icon icon="ion-heart"><span>{{post.likes}}</span></ons-icon>
+                  <ons-icon icon="ion-star"></ons-icon>
+                </ons-button>
+              </ons-col>
+              <ons-col>
+                <ons-button modifier="quiet">
+                  <ons-icon icon="ion-thumbsup" @click="reply.likes++"><span>{{reply.likes}}</span></ons-icon>
                 </ons-button>
               </ons-col>
             </ons-row>
@@ -66,26 +67,41 @@
 </template>
 
 <script>
+  import {getPostDetail} from '../../apis/forum/post'
+
   export default {
+    mounted: function () {
+      this.$nextTick(() => {
+        this.getPost();
+      });
+    },
     data: function () {
       return {
-        postContents: [
-          {
-            floor: 1,
-            name: 'foo',
-            icon: 'http://placekitten.com/g/327/200',
-            content: '由香港教育局组织的“同根同心—香港初中及高小学生内地交流计划系列团”，计划于2017年11月至2018年2月组织约2600名香港小学师生分批前往上海参观交流。'
-          },
-          {
-            floor: 2,
-            name: 'foo2',
-            icon: 'http://placekitten.com/g/327/201',
-            content: '11月2日下午，香港基督教粉岭神召会小学的125名师生前往浦东新区洋泾实验小学参观交流。!'
-          }
-        ]
+        getPostFinished: false,
+        title: "",
+        content: "",
+        replies: []
       }
     },
-    methods: {}
+    methods: {
+      getPost() {
+        getPostDetail(this.postId).then(response => {
+          this.title = response.data.title;
+          this.content = response.data.content;
+          this.replies = response.data.replies;
+          this.getPostFinished = true;
+          for (let replyIdx in this.replies) {
+            this.$store.dispatch('auth/getUserIcon', 'name', this.replies[replyIdx].user).then(response => {
+              let newItem = this.replies[replyIdx];
+              newItem.icon = response.data.iconUrl;
+              this.$set(this.replies, replyIdx, newItem);
+            }, response => {
+            })
+          }
+        }, response => {
+        });
+      },
+    }
   }
 </script>
 
