@@ -50,7 +50,7 @@
                 <span class="list-item__title">{{listItem.postTitle}}</span>
                 <span class="list-item__subtitle">
                   <div class="pull-left">
-                  <i class="icon ion-person"></i>{{listItem.lastReplyName}}
+                  <i class="icon ion-person"></i>{{listItem.postUser}}
                   </div>
                   <div class="pull-right">
                   <i class="icon ion-android-time"></i>{{listItem.lastReplyTime}}
@@ -68,6 +68,7 @@
               },
               methods: {
                 pushPostDetail(postId) {
+                  _this.$store.dispatch('history/pushBrowsingHistory', this.listItem.postId);
                   _this.$store.commit('navigator/push', {
                     extends: PostDetail,
                     data() {

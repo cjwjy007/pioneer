@@ -6,13 +6,13 @@
       <ul class="list list--material">
         <li class="list__item list__item--material post-list-header">
           <div class="list__item__center list__item--material__center">
-            <textarea class="textarea--transparent" rows="1" placeholder="请输入标题" v-model="newPost.postTitle"
+            <textarea class="textarea--transparent" rows="1" placeholder="请输入标题" v-model="newPost.title"
                       style="font-size:20px;overflow: hidden"></textarea>
           </div>
         </li>
         <li class="list__item list__item--material  post-list-body">
           <div class="list__item__center list__item--material__center">
-            <textarea class="textarea--transparent" rows="25" placeholder="请输入内容" v-model="newPost.postContent"
+            <textarea class="textarea--transparent" rows="25" placeholder="请输入内容" v-model="newPost.content"
             ></textarea>
           </div>
         </li>
@@ -35,24 +35,24 @@
     data: function () {
       return {
         newPost: {
-          postTitle: null,
-          postContent: null,
-          postType: null
+          title: null,
+          content: null,
+          forumName: null
         }
       }
     },
     methods: {
       sendPost() {
-        if(!this.newPost.postTitle){
+        if(!this.newPost.title){
           this.$ons.notification.toast('请输入帖子标题', { animation: "fall", buttonLabel: 'x', timeout: 1500 });
           return;
         }
-        if(!this.newPost.postContent){
+        if(!this.newPost.content){
           this.$ons.notification.toast('请输入帖子内容', { animation: "fall", buttonLabel: 'x', timeout: 1500 });
           return;
         }
-        if (!this.newPost.postType) {
-          this.newPost.postType = this.forumName;
+        if (!this.newPost.forumName) {
+          this.newPost.forumName = this.forumName;
         }
         sendNewPost(this.newPost).then(response => {
           this.$ons.notification.toast('发帖成功', { animation: "fall", buttonLabel: 'x', timeout: 1500 });

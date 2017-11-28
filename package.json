@@ -17,7 +17,6 @@
     "cordova": "^7.1.0",
     "cordova-ios": "^4.5.2",
     "cordova-plugin-whitelist": "1",
-    "js-cookie": "^2.2.0",
     "less": "^2.7.3",
     "npm": "^5.5.1",
     "onsenui": "^2.6.1",

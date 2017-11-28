@@ -17,9 +17,38 @@ export function sendNewPost(newPost){
   });
 }
 
+export function sendNewReply(postId){
+  return fetch({
+    url: '/forum/newReply',
+    method: 'post',
+    data: postId
+  });
+}
+
 export function getPostDetail(postId){
   return fetch({
     url: '/forum/getPostDetail',
+    method: 'post',
+    data: {
+      postId : postId
+    }
+  });
+}
+
+export function getPostOverview(postId){
+  return fetch({
+    url: '/forum/getPostOverview',
+    method: 'post',
+    data: {
+      postId : postId
+    }
+  });
+}
+
+
+export function addToFavorite(postId){
+  return fetch({
+    url: '/forum/addToFavorite',
     method: 'post',
     data: {
       postId : postId

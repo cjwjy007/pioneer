@@ -33,17 +33,7 @@
             <span class="home-posts-header-name"><b>{{post.name}}</b></span>
             <span class="home-posts-header-date">{{post.time}}</span>
           </div>
-          <ons-button class="home-posts-header-arrow" modifier="quiet" @click="$ons.openActionSheet({
-              cancelable: true,
-              buttons: [
-                '添加到收藏',
-                '不喜欢该推荐',
-                {
-                  label: '取消',
-                  icon: 'md-close'
-                }
-              ]
-            })">
+          <ons-button class="home-posts-header-arrow" modifier="quiet" @click="actionSheetVisible = true">
             <ons-icon icon="ion-arrow-down-b"></ons-icon>
           </ons-button>
         </div>
@@ -72,6 +62,14 @@
         </div>
       </v-ons-card>
     </div>
+    <v-ons-action-sheet
+      :visible.sync="actionSheetVisible"
+      cancelable
+    >
+      <v-ons-action-sheet-button icon="md-square-o">添加到收藏</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o">不喜欢该推荐</v-ons-action-sheet-button>
+      <v-ons-action-sheet-button icon="md-square-o" @click="actionSheetVisible = false">取消</v-ons-action-sheet-button>
+    </v-ons-action-sheet>
 
   </v-ons-page>
 </template>
@@ -80,6 +78,7 @@
   export default {
     data: function () {
       return {
+        actionSheetVisible : false,
         hookState: 'initial',
         posts: [
           {

@@ -1,14 +1,32 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Cookies from 'js-cookie'
 import {login, logout, register} from './apis/auth/auth.js';
 import {getUserIcon} from './apis/util/util';
+import storage from './storage';
 
 Vue.use(Vuex)
 
 
 export default new Vuex.Store({
   modules: {
+    history: {
+      namespaced: true,
+      actions:{
+        pushBrowsingHistory(store, postInfo) {
+          let history = storage.getObject('browsingHistory');
+          if (!history) {
+            history = [];
+          }
+          if(history.indexOf(postInfo) === -1){
+            history.push(postInfo);
+          }
+          storage.setObject('browsingHistory', history);
+        },
+        clearBrowsingHistory(store){
+          storage.removeObject('browsingHistory');
+        }
+      }
+    },
     auth: {
       namespaced: true,
       state: {
@@ -18,13 +36,14 @@ export default new Vuex.Store({
         role: -1
       },
       actions: {
-        getUserIcon(store,type,userInfo){
-          return getUserIcon(type,userInfo);
+        getUserIcon(store, userInfo) {
+          return getUserIcon(userInfo.type, userInfo.info);
         },
         cookieLogin(store) {
-          if (Cookies.get('token')) {
-            const token = Cookies.get('token');
-            const userInfo = Cookies.getJSON('userInfo');
+
+          if (storage.getVar('token')) {
+            const token = storage.getVar('token');
+            const userInfo = storage.getObject('userInfo');
             store.commit('LOGIN', {
               id: userInfo.id,
               name: userInfo.name,
@@ -47,14 +66,14 @@ export default new Vuex.Store({
           login(userInfo).then(response => {
             const token = response.data.token;
             const userInfo = response.data;
-            Cookies.set('token', token);
-            Cookies.set('userInfo', userInfo);
+            storage.setVar('token', token);
+            storage.setObject('userInfo', userInfo);
             store.commit('LOGIN', {
               id: userInfo.id,
               name: userInfo.name,
               token: token,
               role: userInfo.role
-            })
+            });
             this.commit('navigator/pop');
             this.commit('navigator/pushNextPage');
           }, response => {
@@ -62,8 +81,8 @@ export default new Vuex.Store({
         },
         commitLogout(store) {
           logout().then(response => {
-            Cookies.remove('token');
-            Cookies.remove('userInfo');
+            storage.removeVar('token');
+            storage.removeObject('userInfo');
             store.commit('LOGOUT');
             this.commit('navigator/cleanNextPage');
           }, response => {

@@ -8,7 +8,6 @@ import VueOnsen from 'vue-onsenui'
 import store from './store'
 import Navigator from './AppNavigator.vue'
 import CustomToolbar from './components/CustomToolbar.vue';
-import Cookies from 'js-cookie'
 
 Vue.config.productionTip = false
 
