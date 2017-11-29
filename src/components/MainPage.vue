@@ -3,7 +3,7 @@
     <ons-toolbar id="general-toolbar">
       <div class="left">
         <ons-button modifier="quiet" @click="$store.commit('splitter/toggle')">
-          <img class="profile-thumbnail" src="http://placekitten.com/g/70/70">
+          <img class="profile-thumbnail" :src="userIcon">
         </ons-button>
       </div>
       <div id="toolbar-center" class="center">{{title}}</div>
@@ -36,13 +36,14 @@
 
   export default {
     name: 'main',
+    props: ['userName', 'userId', 'userIcon', 'isLogin'],
     data() {
       return {
         shutUp: !this.md,
         colors: red,
         animationOptions: {},
         topPosition: 0,
-        activeIndex: 1,
+        activeIndex: 2,
         tabs: [
           {
             icon: 'ion-home',
@@ -70,7 +71,13 @@
             icon: 'ion-ios-settings',
             label: '我的',
             page: Setting,
-            key: "settingPage"
+            key: "settingPage",
+            props: {
+              userName: this.userName,
+              userId: this.userId,
+              userIcon: this.userIcon,
+              isLogin: this.isLogin,
+            },
           }
         ]
       }
@@ -94,7 +101,7 @@
           top: this.topPosition + 'px',
           transition: `all ${this.animationOptions.duration || 0}s ${this.animationOptions.timing || ''}`
         }
-      }
+      },
     }
   }
 </script>

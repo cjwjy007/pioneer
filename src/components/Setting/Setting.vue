@@ -1,22 +1,19 @@
 <template>
   <v-ons-page>
-    <div class="setting-header-bar">
-      <div class="setting-header-bar-container">
-        <img class="setting-profile-img" src="../../assets/images/icon.png">
-        <ul class="setting-profile-des">
-          <li>
-            <span class="setting-user-name">
-              {{userName}}
-            </span>
-          </li>
-          <li>
-            <span class="setting-user-id">
-              ID:{{userID}}
-            </span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <!--<div class="setting-header-bar">-->
+      <!--<div class="setting-header-bar-container">-->
+        <!--<ul class="setting-profile-des">-->
+          <!--<li>-->
+            <!--<span class="setting-user-name">-->
+              <!--{{userName}}-->
+            <!--</span>-->
+            <!--<span class="setting-user-id">-->
+              <!--ID:{{userId}}-->
+            <!--</span>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</div>-->
     <v-ons-card>
       <div class="setting-header">
         <b>功能面板</b>
@@ -102,6 +99,7 @@
   import version from  './Version.vue';
   import connectUs from  './ConnectUs.vue';
   export default {
+    props:['userName','userId','userIcon','isLogin'],
     data: function () {
       return {
         picSize: '30%',
@@ -129,17 +127,6 @@
           this.$store.commit('navigator/push', page);
         }
 
-      }
-    },
-    computed: {
-      userName: function () {
-        return this.$store.state.auth.token !== null ? this.$store.state.auth.name : '请登录';
-      },
-      userID: function () {
-        return this.$store.state.auth.token !== null ? this.$store.state.auth.id : '';
-      },
-      isLogin: function () {
-        return this.$store.state.auth.token !== null;
       }
     }
   }

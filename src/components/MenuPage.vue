@@ -3,7 +3,7 @@
     <div>
       <div class="setting-header-bar">
         <div class="setting-header-bar-container">
-          <img class="setting-profile-img" src="http://placekitten.com/g/70/70">
+          <img class="setting-profile-img" :src="userIcon">
           <ul class="setting-profile-des">
             <li>
             <span class="setting-user-name">
@@ -12,7 +12,7 @@
             </li>
             <li>
             <span class="menu-user-id">
-              ID:{{userID}}
+              ID:{{userId}}
             </span>
             </li>
           </ul>
@@ -52,8 +52,10 @@
 
 <script>
   import Login from './Auth/Login.vue';
+  import anonymous_user from  "../assets/images/anonymous_user.png";
   export default {
     name: 'menu',
+    props:['userName','userId','userIcon','isLogin'],
     data() {
       return {
         essentialLinks: [
@@ -98,17 +100,6 @@
         if(this.isLogin){
           this.$store.dispatch('auth/commitLogout');
         }
-      }
-    },
-    computed: {
-      userName: function () {
-        return this.$store.state.auth.token !== null ? this.$store.state.auth.name : '请登录';
-      },
-      userID: function () {
-        return this.$store.state.auth.token !== null ? this.$store.state.auth.id : '';
-      },
-      isLogin: function () {
-        return this.$store.state.auth.token !== null;
       }
     }
   }

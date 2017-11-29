@@ -56,4 +56,25 @@ export function addToFavorite(postId){
   });
 }
 
+export function getMyPosts(){
+  return fetch({
+    url: '/forum/getMyPosts',
+    method: 'post',
+  });
+}
+
+export function getMyReply(){
+  return fetch({
+    url: '/forum/getMyReply',
+    method: 'post',
+  });
+}
+
+export function getMyFavorite(){
+  return fetch({
+    url: '/forum/getMyFavorite',
+    method: 'post',
+  });
+}
+
 

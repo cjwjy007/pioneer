@@ -4,79 +4,86 @@
       <div slot="center">{{ user.name }}</div>
       <div slot="right"><img class="chat-detail-icon" :src="user.icon"></div>
     </custom-toolbar>
-    <ul>
-      <li v-for="(message, index) in messages" :key="message.content">
-        <div class="message-wrapper">
-          <div v-if="!message.sendOut">
-            <span class="dateDetail" style="float:right">{{message.date }}</span>
-            <img class="profile-pic left" :src="user.icon">
-            <div class="chat-bubble-left">
-              <span class="bubble-tri-left"></span>
-              <div class="message">{{message.content}}</div>
+    <div class="content">
+      <div id="chat-area" style="height: 100%;">
+        <ul>
+          <li v-for="(message, index) in messages" :key="message.content">
+            <div class="message-wrapper">
+              <div v-if="!message.sendOut">
+                <div v-show="dateShow"><span class="dateDetail"
+                                             style="float:right">{{dateService.chatDateFormat(message.date) }}</span>
+                </div>
+                <img class="profile-pic left" :src="user.icon">
+                <div class="chat-bubble-left">
+                  <span class="bubble-tri-left"></span>
+                  <div class="message" @click="showPopover">{{message.content}}</div>
+                </div>
+              </div>
+              <div v-else>
+                <div v-show="dateShow"><span class="dateDetail"
+                                             style="float:left">{{dateService.chatDateFormat(message.date)}}</span>
+                </div>
+                <img class="profile-pic right" :src="user.icon">
+                <div class="chat-bubble-right">
+                  <span class="bubble-tri-right"></span>
+                  <div class="message" @click="showPopover">{{message.content}}</div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div v-else>
-            <span class="dateDetail" style="float:left">{{message.date }}</span>
-            <img class="profile-pic right" :src="user.icon">
-            <div class="chat-bubble-right">
-              <span class="bubble-tri-right"></span>
-              <div class="message">{{message.content}}</div>
-            </div>
-          </div>
-        </div>
-      </li>
-
-    </ul>
-
+          </li>
+        </ul>
+      </div>
+    </div>
     <div class="foot-wrapper">
-      <input class="chat-input" type="text" name="" @keyup.enter="send(msg)" v-model="msg">
+      <input class="chat-input" type="text" name="" @keyup.enter="sendMsg" v-model="msg">
       <a class="chat-sub" @click="sendMsg"><i class="icon ion-paper-airplane"></i></a>
     </div>
+    <ons-popover cancelable direction="up" id="popover">
+      This popover can be cancelled!
+    </ons-popover>
   </v-ons-page>
 </template>
 
 <script>
+  import dateService from '../../services/dateService';
+
   export default {
+    mounted() {
+      this.initDateDisplayEvent();
+    },
     data: function () {
       return {
+        dateService: dateService,
         msg: '',
-        messages: [
-          {
-            date: '20 minute ago',
-            content: 'test',
-            sendOut: true,
-          },
-          {
-            date: '15 minute ago',
-            content: 'test1',
-            sendOut: false,
-          },
-          {
-            date: '4 minute ago',
-            content: 'test2',
-            sendOut: false,
-          },
-          {
-            date: '1 minute ago',
-            content: 'test3',
-            sendOut: true,
-          }
-        ]
+        dateShow: false,
+        messages: []
       }
     },
     methods: {
       sendMsg() {
-        if(this.msg !== ''){
+        if (this.msg !== '') {
           this.messages.push(
             {
-              date: 'just now',
+              date: dateService.getFormatCSTDate(),
               content: this.msg,
               sendOut: true,
             }
           );
           this.msg = '';
         }
-      }
+      },
+      initDateDisplayEvent() {
+        let chatArea = this.$ons.GestureDetector(document.querySelector('#chat-area'));
+        chatArea.on('dragleft', (event) => {
+          this.dateShow = true;
+        });
+        chatArea.on('release', (event) => {
+          this.dateShow = false;
+        });
+      },
+      showPopover(target) {
+        document.getElementById('popover').show(target);
+      },
     }
   }
 </script>

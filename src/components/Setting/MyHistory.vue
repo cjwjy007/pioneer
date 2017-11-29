@@ -39,8 +39,7 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import storage from '../../storage';
+  import storage from '../../services/storage';
   import PostDetail from '../Forum/PostDetail.vue'
   import {getPostOverview} from '../../apis/forum/post'
 

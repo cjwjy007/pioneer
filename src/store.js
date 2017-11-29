@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {login, logout, register} from './apis/auth/auth.js';
 import {getUserIcon} from './apis/util/util';
-import storage from './storage';
+import storage from './services/storage';
 
 Vue.use(Vuex)
 
@@ -40,7 +40,6 @@ export default new Vuex.Store({
           return getUserIcon(userInfo.type, userInfo.info);
         },
         cookieLogin(store) {
-
           if (storage.getVar('token')) {
             const token = storage.getVar('token');
             const userInfo = storage.getObject('userInfo');
